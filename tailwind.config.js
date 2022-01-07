@@ -1,6 +1,6 @@
 // const { black } = require('tailwindcss/colors')
 const colors = require('tailwindcss/colors')
-const pallete = require('../dashboard/pallete')
+const pallete = require('./pallete')
 
 module.exports = {
   purge: [],
