@@ -23,41 +23,118 @@
 
         <p class="text-sm mt-8 font-regular text-gray-600">Este aqui é a sua chave de api</p>
 
-        <div class="flex items-center mt-2 pr-5 justify-between w-full lg:w-1/2 p-2 rounded-md bg-brand-gray">
-           <span class="text-gray-600 rounded-md ml-5 font-medium w-full">
-            {{ store.currentUser.apiKey }}
+        <content-loader
+          v-if="store.Global.isLoading || state.isLoading"
+          class="roundend"
+          width="600px"
+          height="50px"
+        />
+
+        <div v-else class="flex items-center mt-2 pr-5 justify-between w-full lg:w-1/2 p-2 rounded-md bg-brand-gray">
+
+           <span v-if="state.hasError">Error ao carregar apiKey</span>
+           <span v-else class="text-gray-600 rounded-md ml-5 font-medium w-full">
+            {{ store.User.currentUser.apiKey }}
            </span>
+
            <div class="flex items-center justify-between w-16">
-              <icon name="Copy" color="#A9A9A9" size="19" class="cursor-pointer" />
-              <icon name="Loading" color="#A9A9A9" size="19" class="cursor-pointer" />
+              <icon
+                @click="handleCopy"
+                name="Copy"
+                color="#A9A9A9"
+                size="19"
+                class="cursor-pointer" />
+              <icon
+                @click='handleGenerateApiKey'
+                name="Loading"
+                color="#A9A9A9"
+                size="19"
+                class="cursor-pointer" />
            </div>
+
         </div>
 
         <p class="text-sm mt-6 font-regular text-gray-600">Coloque o script abaixo no seu site para começar a receber feedbacks</p>
 
-        <div class="mt-2 p-2 w-full lg:w-2/3 rounded-md bg-brand-gray text-gray-600 overflow-x-scroll">
-          <pre>&lt;script src="https://filipemoura-feedbacker-widget.netfly.app?apiKey="{{ store.currentUser.apiKey }}"&gt;&lt;/script&gt;</pre>
+        <content-loader
+          v-if="store.Global.isLoading || state.isLoading"
+          class="roundend"
+          width="600px"
+          height="50px"
+        />
+        <div v-else class="mt-2 p-2 w-full lg:w-2/3 rounded-md bg-brand-gray text-gray-600 overflow-x-scroll">
+          <span v-if="state.hasError">Error ao carregar o script</span>
+          <pre v-else>&lt;script src="https://filipemoura-feedbacker-widget.netfly.app?apiKey="{{ store.User.currentUser.apiKey }}"&gt;&lt;/script&gt;</pre>
         </div>
 
       </div>
     </div>
 </template>
 <script>
+import { reactive } from '@vue/reactivity'
 import HeaderLogged from '../../components/HeaderLogged'
-
+import ContentLoader from '../../components/ContentLoader'
 import Icon from '../../components/Icon/'
 import useStore from '../../hooks/useStore'
+import { setApiKey } from '../../store/user'
+import services from '../../services'
+import { watch } from '@vue/runtime-core'
+import { useToast } from 'vue-toastification'
 
 export default {
   components: {
     Icon,
-    HeaderLogged
+    HeaderLogged,
+    ContentLoader
   },
   setup () {
-    const store = useStore('User')
+    const state = reactive({
+      hasError: false,
+      isLoading: false
+    })
+
+    const store = useStore()
+    const toast = useToast()
+
+    watch(() => store.User.currentUser, () => {
+      if (!store.Global.isLoading && !store.User.currentUser.apiKey) {
+        handleError(true)
+      }
+    })
+
+    function handleError (error) {
+      state.isLoading = false
+      state.hasError = !!error
+    }
+
+    async function handleGenerateApiKey () {
+      try {
+        state.isLoading = true
+        const { data } = await services.users.genereteApiKey()
+
+        setApiKey(data.apiKey)
+        state.isLoading = false
+      } catch (error) {
+        handleError(error)
+      }
+    }
+
+    async function handleCopy () {
+      try {
+        toast.clear()
+        await navigator.clipboard.writeText(store.User.currentUser.apiKey)
+
+        toast.success('Copiado!')
+      } catch (error) {
+        handleError(error)
+      }
+    }
 
     return {
-      store
+      store,
+      state,
+      handleCopy,
+      handleGenerateApiKey
     }
   }
 }
