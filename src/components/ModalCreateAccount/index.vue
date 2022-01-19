@@ -138,7 +138,6 @@ export default {
         router.push({ name: 'Feedbacks' })
         modal.close()
       }
-
       state.isLoading = false
     }
 
