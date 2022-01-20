@@ -34,6 +34,7 @@
 <script>
 import { reactive } from '@vue/reactivity'
 import services from '../../services'
+import useStore from '../../hooks/useStore'
 
 const LABELS = {
   all: 'Todos',
@@ -69,6 +70,7 @@ function applyFiltersStructure (summary) {
 
 export default {
   async setup (_, { emit }) {
+    const store = useStore('Global')
     const state = reactive({
       hasError: false,
       filters: [
@@ -86,7 +88,7 @@ export default {
     }
 
     function handleSelect ({ type }) {
-      if (state.isLoading) {
+      if (store.isLoading) {
         return
       }
 

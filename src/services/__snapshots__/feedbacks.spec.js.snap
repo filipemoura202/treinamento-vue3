@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Feedback Service Should return a summary of feedbacks 1`] = `
+Object {
+  "data": Object {
+    "all": 7,
+    "idea": 3,
+    "issue": 3,
+    "other": 0,
+  },
+}
+`;
+
+exports[`Feedback Service Should return all feedbacks per type 1`] = `
+Object {
+  "data": Object {
+    "pagination": Object {},
+    "results": Array [],
+  },
+}
+`;

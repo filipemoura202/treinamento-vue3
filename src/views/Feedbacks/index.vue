@@ -161,8 +161,6 @@ export default {
           ...state.pagination
         })
 
-        console.log(data.results)
-
         state.feedbacks = data.results
         state.pagination = data.pagination
         state.isLoadingFeedbacks = false
