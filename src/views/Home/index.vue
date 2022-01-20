@@ -4,7 +4,7 @@
     @login="handleLogin"
   />
   <contact
-    @emailed="handleAccountCreate"
+    @emailed="()=> alert('Teste')"
   />
   <div class="flex flex-col items-center justify-center py-10 bg-brand-gray">
     <p class="font-medium text-center text-gray-800">feedbacker &copy; {{ new Date().getFullYear() }}</p>

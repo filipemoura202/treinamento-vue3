@@ -8,6 +8,7 @@
             <div class="flex md:flex-col">
               <ul class="flex list-none">
                   <li
+                    id='credential-button'
                     @click="() => router.push({ name: 'Credentials'})"
                     class="px-6 py-2 font-bold rounded-full text-white focus:outline-none cursor-pointer"
                   >
@@ -20,6 +21,7 @@
                     Feedbacks
                   </li>
                   <li
+                    id='logout-button'
                     @click="handleLogout"
                     class="px-6 py-2 font-bold rounded-full text-white focus:outline-none text-brand-main cursor-pointer bg-white ">
                     {{ labelLogged }}
