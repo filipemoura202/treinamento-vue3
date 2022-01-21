@@ -12,7 +12,6 @@ describe('Feedback Service', () => {
     const resp = {
       pagination: {},
       results: []
-
     }
 
     mockAxios.get.mockImplementationOnce(() => {

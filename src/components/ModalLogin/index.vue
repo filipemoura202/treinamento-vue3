@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center" id="modal-login">
     <h1 class="text-xl font-black text-center text-gray-800">Entre na sua conta</h1>
     <button class="text-4xl text-gray-600 focus:outline-none" @click="close">
       <icon name="Close" color="#000" size="16" />
@@ -13,6 +13,7 @@
         </span>
         <input
           type="email"
+          id="email-field"
           v-model="state.email.value"
           :class="{
             'border-brand-danger': !!state.email.errorMessage
@@ -21,6 +22,7 @@
           placeholder="janeFisher@gmail.com"
         />
         <span
+          id="email-error"
           v-if="!!state.email.errorMessage"
           class="block font-medium text-brand-danger">
           {{ state.email.errorMessage }}
@@ -31,6 +33,7 @@
           Senha
         </span>
         <input
+          id="password-field"
           type="password"
           v-model="state.password.value"
           :class="{
@@ -48,6 +51,7 @@
     <button
      :disabled="state.isLoading"
      type="submit"
+     id="submit-login"
      :class="{
        'opacity-50' : state.isLoading
       }"
@@ -112,7 +116,7 @@ export default {
 
         if (!errors) {
           window.localStorage.setItem('token', data.token)
-          router.push({ name: 'Credentials' })
+          router.push({ name: 'Feedbacks' })
           state.isLoading = false
           modal.close()
           return
