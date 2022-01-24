@@ -16,6 +16,18 @@ describe('Credentials', () => {
 
     cy.get('#credential-button').click()
 
+    cy.wait(4000)
+
     cy.url().should('include', '/credentials')
+
+    const oldApikey = cy.get('#apikey').invoke('text')
+
+    cy.get('#generate-apikey').click()
+
+    cy.wait(2000)
+
+    const newApikey = cy.get('#apikey').invoke('text')
+
+    expect(oldApikey).to.not.equal(newApikey)
   })
 })

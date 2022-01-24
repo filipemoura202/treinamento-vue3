@@ -1,0 +1,29 @@
+name: Unit testing
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ $default-branch ]
+  push-request:
+    branches: [ $default-branch ]
+
+defaults: 
+  run:
+    working-directory: src
+
+jobs: 
+  jest:
+    run-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-vesion: ${{ matrix.node-version }} 
+      run: npm install
+      run: npm test:unit --if-present
