@@ -1,4 +1,4 @@
-name: E2e testing
+name: Dashboard e2e testing
 
 on:
   workflow_dispatch:
@@ -7,9 +7,9 @@ on:
   pull_request:
     branches: [ $default-branch ]
 
-jobs: 
+jobs:
   cypress:
-    defaults: 
+    defaults:
       run:
         working-directory: src
 
@@ -17,22 +17,22 @@ jobs:
     timeout-minutes: 15
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - run: npm install
+      - run: npm install
 
-    - run: npm run build
-      env: 
-        NODE_ENV: production
-      
-    - name: Run project localy
-      run: |
-        npm install serve
-        $(npm bin)/serve dist -s -p 8080 &
+      - run: npm run build
+        env:
+          NODE_ENV: production
 
-    - name: Run Tests
-      uses: cypress-io/github-action@v2
-      with:
-        working-directory: src
-        browser: chrome
-        headless: true
+      - name: Run project locally
+        run: |
+          npm install serve
+          $(npm bin)/serve dist -s -p 8080 &
+
+      - name: Run tests
+        uses: cypress-io/github-action@v2
+        with:	
+          working-directory: src
+          browser: chrome
+          headless: true
