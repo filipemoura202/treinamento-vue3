@@ -12,12 +12,15 @@ jobs:
     defaults: 
       run:
         working-directory: src
-    run-on: ubuntu-latest
-    timeout-minute: 15
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
     - uses: actions/checkout@v2
+
     - run: npm install
+
     - run: npm run build
       env: 
         NODE_ENV: production
@@ -33,4 +36,3 @@ jobs:
         working-directory: src
         browser: chrome
         headless: true
-      

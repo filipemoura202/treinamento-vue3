@@ -13,7 +13,7 @@ defaults:
 
 jobs: 
   jest:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -25,5 +25,5 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-vesion: ${{ matrix.node-version }} 
-      run: npm install
-      run: npm test:unit --if-present
+    - run: npm install
+    - run: npm test:unit --if-present
