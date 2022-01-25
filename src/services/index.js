@@ -18,8 +18,6 @@ const httpClient = axios.create({
 httpClient.interceptors.request.use((config) => {
   setGlobalLoading(true)
 
-  console.log(process.env.NODE_ENV)
-
   const token = window.localStorage.getItem('token')
 
   if (token) {
