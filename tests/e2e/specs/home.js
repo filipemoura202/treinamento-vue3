@@ -1,4 +1,4 @@
-const APP_URL = process.env.APP_URL || 'http://localhost:8080/'
+const APP_URL = process.env.APP_URL || 'http://localhost:8080'
 
 describe('Home', () => {
   it('Should render create account modal when click on cta create account button', () => {
@@ -70,6 +70,6 @@ describe('Home', () => {
 
     cy.get('#logout-button').click()
 
-    cy.url().should('eq', APP_URL)
+    cy.url().should('include', '/')
   })
 })

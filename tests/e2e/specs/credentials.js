@@ -1,4 +1,4 @@
-const APP_URL = process.env.APP_URL || 'http://localhost:8080/'
+const APP_URL = process.env.APP_URL || 'http://localhost:8080'
 
 describe('Credentials', () => {
   it('Should render a corretcly credential page', () => {
