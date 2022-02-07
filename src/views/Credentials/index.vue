@@ -65,7 +65,7 @@
         />
         <div v-else class="mt-2 p-2 w-full lg:w-2/3 rounded-md bg-brand-gray text-gray-600 overflow-x-scroll">
           <span v-if="state.hasError">Error ao carregar o script</span>
-          <pre v-else>&lt;script src="https://filipemoura-feedbacker-widget.netfly.app?apiKey="{{ store.User.currentUser.apiKey }}"&gt;&lt;/script&gt;</pre>
+          <pre v-else>&lt;script src="https://filipemoura-feedbacker-widget.netlify.app?apiKey="{{ store.User.currentUser.apiKey }}"&gt;&lt;/script&gt;</pre>
         </div>
 
       </div>

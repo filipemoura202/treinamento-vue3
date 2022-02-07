@@ -6,7 +6,7 @@ import FeedbacksService from './feedbacks'
 import { setGlobalLoading } from '../store/global'
 
 const API_ENVS = {
-  production: 'https://backend-treinamento-vue3.vercel.app',
+  production: 'https://backend-treinamento-vue3-one.vercel.app',
   development: '',
   local: 'http://localhost:3000'
 }
@@ -17,8 +17,6 @@ const httpClient = axios.create({
 
 httpClient.interceptors.request.use((config) => {
   setGlobalLoading(true)
-
-  console.log(process.env.NODE_ENV)
 
   const token = window.localStorage.getItem('token')
 
