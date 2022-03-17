@@ -66,12 +66,12 @@
         <div v-else class="mt-2 p-2 w-full lg:w-2/3 rounded-md bg-brand-gray text-gray-600 overflow-x-scroll">
           <span v-if="state.hasError">Error ao carregar o script</span>
           <pre v-else>
-&lt;script
-  defer
-  async
-  onload="init('{{store.User.currentUser.apiKey}}')"
-  src="https://filipemoura202-feedbacker-widget.netlify.app/init.js"
-&gt;&lt;/script&gt;
+            &lt;script
+              defer
+              async
+              onload="init('{{store.User.currentUser.apiKey}}')"
+              src="https://filipemoura202-feedbacker-widget.netlify.app/init.js"
+            &gt;&lt;/script&gt;
           </pre>
         </div>
 
