@@ -8,7 +8,6 @@
       <div class="mt-10">
         <button
           class="bg-brand-main px-6 py-2 mt-10 font-bold text-white rounded-full focus:outline-none"
-          @click="() => emit('emailed')"
         >
           Nos mande um e-mail!
         </button>
@@ -19,8 +18,6 @@
 
 <script>
 export default {
-  setup (_, { emit }) {
-    return { emit }
-  }
+
 }
 </script>
