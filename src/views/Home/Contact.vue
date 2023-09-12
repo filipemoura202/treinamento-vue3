@@ -9,7 +9,7 @@
         <button
           class="bg-brand-main px-6 py-2 mt-10 font-bold text-white rounded-full focus:outline-none"
         >
-          Nos mande um e-mail!
+          Nos mandee um e-mail!
         </button>
       </div>
     </div>
